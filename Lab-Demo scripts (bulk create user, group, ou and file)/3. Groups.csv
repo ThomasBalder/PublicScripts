@@ -1,0 +1,10 @@
+GroupName,GroupType,GroupMembers,GroupMembers2,GroupMembers3,GroupMembers4,GroupLocation
+"Accounting,Global,Msmith,,,,""OU=Groups,OU=Spinnaker Traders"""
+"Development,Global,Mlennon,LJea,,,""OU=Groups,OU=Spinnaker Traders"""
+"IT,Global,Rfroning,Mfraser,,,""OU=Groups,OU=Spinnaker Traders"""
+"Management,Global,Dsmith,Ismith,Tintin,,""OU=Groups,OU=Spinnaker Traders"""
+"Marketing & communication,Global,Ajones,Ijea,,,""OU=Groups,OU=Spinnaker Traders"""
+"Office,Global,JLynch,,,,""OU=Groups,OU=Spinnaker Traders"""
+"Sales,Global,Fsmith,SJones,Ejea,,""OU=Groups,OU=Spinnaker Traders"""
+"Human Resources,Global,Estone,,,,""OU=Groups,OU=Spinnaker Traders"""
+"Expedition,Global,Tintin,Ahaddock,Ccalculus,,""OU=Groups,OU=Spinnaker Traders"""
