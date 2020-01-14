@@ -2,6 +2,8 @@
 .SYNOPSIS
 Script to create a user account in local AD and sync it to O365.
 
+.AUTHOR Thomas Balder (inspired by others)
+
 .AUTHOR 
 Thomas Balder (inspired by others)
 https://github.com/ThomasBalder/PublicScripts 
