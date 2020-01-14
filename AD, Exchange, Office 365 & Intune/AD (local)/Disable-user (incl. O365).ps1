@@ -1,9 +1,12 @@
-<#
+﻿<#
 .SYNOPSIS
 Script to modify a user in AD & Office 365. Useful for user-termination.
-.AUTHOR Thomas Balder (inspired by others)
 
-.Descritpion
+.AUTHOR 
+Thomas Balder (inspired by others).
+https://github.com/ThomasBalder/PublicScripts
+
+.DESCRIPTION
 - Appends the displayname with "(shared)";
 - Removes user from all local AD-groups;
 - Moves the user to a dedicated disabled users OU;
@@ -15,11 +18,10 @@ Script to modify a user in AD & Office 365. Useful for user-termination.
 - Converts the mailbox to a shared mailbox;
 - Removes the Office 365 & Intune licenses;
 - Gives a given user FullAccess permissions on the shared mailbox;
-- Optionally gives a fixed set of people FullAcess permissions on the shared mailbox (line 128-132);
 - Closes/removes all cloud-sessions;
 - Creates (and overwrites) a logfile of this whole proces.
 
-.Requirements
+.REQUIREMENTS
 - At least Powershell V5;
 - ActiveDirectory module (obviously);
 - AzureAD module (can be installed with install-module AzureAD);
@@ -27,10 +29,14 @@ Script to modify a user in AD & Office 365. Useful for user-termination.
 Start-Process "iexplore.exe" "https://cmdletpswmodule.blob.core.windows.net/exopsmodule/Microsoft.Online.CSE.PSModule.Client.application"
 - Correct permissions on both AD and O365.
 
-.Instructions
-- Run script in an elevated (administrator) Powershell prompt on the DC that has the AAD sync tool installed;
-- Modify lines 101 & 134-137 for your own company.
+.INSTRUCTIONS
+- Modify  the variables from line 38 and line 96 (displayname) for your own organization;
+- Run script in an elevated (administrator) Powershell prompt on the DC that has the AAD sync tool installed.
 #>
+
+#General variables
+$SourceOU = (Get-ADUser -Identity $loginname).distinguishedName
+$TargetOU = "OU=Terminated Users,OU=Managed Users,OU=Contoso,DC=contoso,DC=local"
 
 #Start logging
 Start-Transcript -Path c:\temp\User-termination.txt -Force
@@ -57,6 +63,9 @@ $password += Get-RandomCharacters -length 3 -characters "!§$%&/()=?}][{@#*+"
 
 $password = Scramble-String $password
 #endregion
+
+#Import AD module (might not be needed)
+Import-Module ActiveDirectory 
 
 #Connect to O365
 Write-Host "Connecting to Office 365. Please log in with your administartor credentials." -ForegroundColor Yellow
@@ -97,8 +106,6 @@ Set-ADUser $loginname -Enabled $false
 
 #Move the account to the terminated-users ou
 Write-host "The useraccount is now moved to the terminated-users OU." -ForegroundColor Green
-$SourceOU = (Get-ADUser -Identity $loginname).distinguishedName
-$TargetOU = "OU=Terminated Users,OU=Managed Users,OU=Contoso,DC=contoso,DC=local"
 Move-ADObject -Identity $SourceOU -TargetPath $TargetOU
 
 #Sync the changes to Office 365
@@ -130,10 +137,6 @@ Write-Host "The mailbox has been converted, time to set the correct permissions"
 Write-host "Please enter the UPN for the primary user who needs to access the shared mailbox:" -ForegroundColor Yellow
 $Mailboxuser = Read-host 
 Add-MailboxPermission -Identity $upn -User "$mailboxuser" -AccessRights FullAccess -Confirm:$false -AutoMapping $True
-Add-MailboxPermission -Identity $upn -User "user@contoso.com" -AccessRights FullAccess -Confirm:$false -AutoMapping $false
-Add-MailboxPermission -Identity $upn -User "user@contoso.com" -AccessRights FullAccess -Confirm:$false -AutoMapping $false
-Add-MailboxPermission -Identity $upn -User "user@contoso.com" -AccessRights FullAccess -Confirm:$false -AutoMapping $false
-Add-MailboxPermission -Identity $upn -User "user@contoso.com" -AccessRights FullAccess -Confirm:$false -AutoMapping $false
 
 #Region license variables
 #Create objects for the licenses to be added to
@@ -165,6 +168,7 @@ Set-AzureADUserLicense -ObjectId $user.ObjectId -AssignedLicenses $LicensesToAss
 
 #Time to clean up
 Write-Host "Everything is finished, so the connection to Office 365 is being closed." -ForegroundColor Green
+Write-Host "Notepad wil open with the logfile, so you can check for errors." -ForegroundColor Green
 Write-Host "Thank you, and until next time." -ForegroundColor Green
 Get-pssession | Remove-pssession
 

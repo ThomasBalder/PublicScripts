@@ -1,12 +1,23 @@
-<# 
-.SYNOPSIS 
-    Clone-Group
+<#
+.SYNOPSIS
+Small script to copy ADP-group members from one group to another.
+
+.AUTHOR 
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
 .DESCRIPTION 
-    Clones group Members from Source to Target
-.NOTES 
-    Have both Source and Target group Distinguished Name at hand
-.LINK 
-#> 
+See .SYNOPSIS.
+
+.REQUIREMENTS
+- At least Powershell v3 (I think);
+- ActiveDirectory Module;
+- Proper permission on ActiveDirectory
+
+.INSTRUCTIONS
+- Change variables on line 23 & 24;
+- Run script in an elevated (administrator) Powershell prompt on a DC.
+#>
 
 #Set Source and Target Group Distinguished Name
 $sourceGroup = [ADSI]"LDAP://OU=New Users,OU=Managed Users,OU=Contoso,DC=contoso,DC=local"
@@ -18,15 +29,12 @@ $targetGroup = [ADSI]"LDAP://OU=New Users,OU=Managed Users,OU=Contoso,DC=contoso
 "`nCloning Source Group to TargetGroup`n" 
   
 #get Source members
-foreach ($member in $sourceGroup.Member)
-{
-    Try
-    {
+foreach ($member in $sourceGroup.Member) {
+    Try {
         "Adding Member: $member"
         $targetGroup.add("LDAP://$($member)")
     }
-    Catch
-    {
+    Catch {
         Write-Host "Error performing add action" -Fore DarkRed
     }
 
