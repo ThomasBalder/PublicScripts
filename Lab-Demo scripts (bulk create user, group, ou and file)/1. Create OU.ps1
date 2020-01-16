@@ -1,14 +1,26 @@
-﻿#-------------------------------------------------------------------------
-# Author      : Alexandre VIOT alexandreviot.net
-# FileName    : New-OU.ps1
-# Version     : 1.0
-# Revision    :
-# Created     : 26.04.15
-# Description : Powershell script creates OU into Active Directory from a CSV File.
-# Remarks     : CSV file must contains Name and Path.
-#
-# Example use from powershell: PS C:\scripts> & '.\1. CreateOU.ps1' -FileCSV '.\1. OU.csv'
-#-------------------------------------------------------------------------
+﻿<#
+.SYNOPSIS
+Script to create OU in AD from a CSV File.
+
+.AUTHOR 
+Alexandre VIOT alexandreviot.net
+---------------------------------
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
+.DESCRIPTION 
+
+
+.REQUIREMENTS
+- At least Powershell V4
+- Active directory module;
+- Correct permissions on domani/AD.
+
+.INSTRUCTIONS
+- Run script in an elevated (administrator) Powershell prompt on a DC or machine with RAST
+- PS C:\scripts> & '.\1. CreateOU.ps1' -FileCSV '.\1. OU.csv';
+#>
+
 param([parameter(Mandatory=$true)] [String]$FileCSV)
 $listOU=Import-CSV $FileCSV -Delimiter ","
 ForEach($OU in $listOU){

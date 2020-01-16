@@ -1,16 +1,25 @@
-###########################################################  
-# AUTHOR  : Marius / Hican - http://www.hican.nl - @hicannl   
-# DATE    : 08-08-2012 
-# EDIT    : 16-11-2012 
-# CHANGES : Added functionality for duplicate OU names and 
-#           changed the input file slightly because of this 
-# COMMENT : This script does a bulk creation of Groups in 
-#           Active Directory based on an input csv and the 
-#           Active Directory Module.  
-#           Don't forget to modify CSV name and location
-# Usage    : Open script in ISE as admin an run from there. 
-###########################################################  
+<#
+.SYNOPSIS
+Script to create ou's from csv file.
 
+.AUTHOR 
+Marius / Hican - http://www.hican.nl - @hicannl   
+------------------------------------
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
+.DESCRIPTION 
+
+
+.REQUIREMENTS
+- At least Powershell V4;
+- Active directory module;
+- Correct permissions on domani/AD.
+
+.INSTRUCTIONS
+- Change variables (i.e. csv name/location);
+- Run script in an elevated (administrator) Powershell prompt on a DC or machine with RSAT.
+#>
 
 Import-Module ActiveDirectory
 #Import CSV

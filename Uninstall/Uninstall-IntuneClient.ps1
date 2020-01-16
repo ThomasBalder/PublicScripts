@@ -1,4 +1,25 @@
-﻿function Get-ServiceId {
+﻿<#
+.SYNOPSIS
+Script to uninstall the old IntuneClient.
+
+.AUTHOR 
+Microsoft
+----------------------------------------
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
+.DESCRIPTION 
+
+
+.REQUIREMENTS
+- At least Powershell V4
+
+
+.INSTRUCTIONS
+- Run script in an elevated (administrator) Powershell prompt;
+
+#>
+function Get-ServiceId {
     #Set the registry path containing the service ID
     $RegistryPath = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\OnlineManagement"
     try {

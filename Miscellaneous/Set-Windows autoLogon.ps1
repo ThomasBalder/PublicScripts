@@ -1,5 +1,14 @@
 <#
-.Synopsis
+.SYNOPSIS
+Script to enable autoLogon next time when the machine reboots
+
+.AUTHOR 
+VGSandz / https://gallery.technet.microsoft.com/scriptcenter/Set-AutoLogon-and-execute-19ec3879
+--------------------
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
+.DESCRIPTION 
 Here is the PowerShell CmdLet that would enable AutoLogon next time when the server reboots. We could trigger a specific Script to execute after the server is back online after Auto Logon.
 The CmdLet has the follwing parameter(s) and function(s).
 -DefaultUsername : Provide the username that the system would use to login.
@@ -13,8 +22,11 @@ Mandatory Parameters
 -DefaultPassword 
 
 
-.Description
-Here is the PowerShell CmdLet that would enable AutoLogon next time when the server reboots.We could trigger a specific Script to execute after the server is back online after Auto Logon.
+.REQUIREMENTS
+- At least Powershell V5
+
+.INSTRUCTIONS
+- Run script in an elevated (administrator) Powershell prompt.
 
 .Example
 Set-AutoLogon -DefaultUsername "win\admin" -DefaultPassword "password123"
@@ -22,9 +34,9 @@ Set-AutoLogon -DefaultUsername "win\admin" -DefaultPassword "password123"
 .Example
 Set-AutoLogon -DefaultUsername "win\admin" -DefaultPassword "password123" -AutoLogonCount "3"
 
-
 .EXAMPLE
 Set-AutoLogon -DefaultUsername "win\admin" -DefaultPassword "password123" -Script "c:\test.bat"
+
 
 #>
 

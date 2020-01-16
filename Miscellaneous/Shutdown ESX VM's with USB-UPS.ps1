@@ -3,6 +3,11 @@
 Script to shutdown ESX VM's by with help of the APC powerchute agent connected to a UPS with USB (instead of network)
 NOTE: this is just the script. How to setup/install this script is found here: https://www.phy2vir.com/esxi-host-shutdown-with-apc-ups-connected-via-usb/
 
+.AUTHOR 
+Brian Farrugia / https://www.phy2vir.com/esxi-host-shutdown-with-apc-ups-connected-via-usb/
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
 .REQUIREMENTS
 - A (APC) UPS connected via usb to your ESX host.
 - PStools/PSEXec
@@ -25,10 +30,7 @@ Script was compiled from contributions by Alan Renouf and Patrick Terlisten
 To create an encrypted password file, execute the following command
 Read-Host -AsSecureString | ConvertFrom-SecureString | Out-File upssecurestring.txt (on the PCBE machine, with POSH ran as SYSTEM with PStools/PSEXec)
 
-#>
-
-
-<#region one time setup password
+### one time setup password
 On the PCBE machine, open an elevated CMD, navigate to the PStools folder and run:
 .\PSEXec.exe -s -i powershell 
 Read-Host -AsSecureString | ConvertFrom-SecureString | Out-File upssecurestring.txt

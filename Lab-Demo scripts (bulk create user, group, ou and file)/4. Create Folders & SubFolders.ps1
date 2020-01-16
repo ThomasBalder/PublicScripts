@@ -1,9 +1,26 @@
-#======= Begin script ======
-# Place the script and csv in root directory where you want to create the folders i.e. e:\data
-# rename csv to FoldersNames.csv and check if it corresponds with the variable called $Folders in line 6
-# Usage: from powershell cli navigate to script location i.e. e:\data
-# Usage: then '.\4. Create Folders & SubFolders.ps1'
-# This will create an array of objects which have the Name and Type properties as defined in the CSV.
+<#
+.SYNOPSIS
+Script to create folders & subolders from a csv file.
+
+.AUTHOR 
+Someone @ StackExchange: https://superuser.com/questions/808704/create-multiple-folders-and-sub-folders
+
+Thomas Balder (inspired by others)
+https://github.com/ThomasBalder/PublicScripts 
+
+.DESCRIPTION 
+
+
+.REQUIREMENTS
+- At least Powershell V4
+
+.INSTRUCTIONS
+- Place the script and csv in root directory where you want to create the folders i.e. e:\data
+- Rename csv to FoldersNames.csv and check if it matches the variable called $Folders below
+- Run script in an elevated (administrator) Powershell prompt on a fileserver from the script location i.e. e:\data
+- Example: PS E:\data> '.\4. Create Folders & SubFolders.ps1'
+- This will create an array of objects which have the Name and Type properties as defined in the CSV.
+#>
 
 $Folders=Import-Csv .\FolderNames.csv";
 
