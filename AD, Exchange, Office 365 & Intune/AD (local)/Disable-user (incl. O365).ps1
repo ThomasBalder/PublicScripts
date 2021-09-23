@@ -34,6 +34,25 @@ Start-Process "iexplore.exe" "https://cmdletpswmodule.blob.core.windows.net/exop
 - Run script in an elevated (administrator) Powershell prompt on the DC that has the AAD sync tool installed.
 #>
 
+
+function Test-IsAdministrator {
+    <#
+    .Synopsis
+        Tests if the user is an administrator
+    .Description
+        Returns true if a user is an administrator, false if the user is not an administrator        
+    .Example
+        Test-IsAdministrator
+    #>   
+    
+    param() 
+    $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
+    (New-Object Security.Principal.WindowsPrincipal $currentUser).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+} #end function Test-IsAdministrator
+
+# Controleer of gebruiker een Administrator Powershell sessie heeft gestart
+If(-not (Test-IsAdministrator)) { Write-Output "Admin rights are required for this script. Please open a Administrator Powershell prompt and rerun the script." ; exit  }
+
 #General variables
 $SourceOU = (Get-ADUser -Identity $loginname).distinguishedName
 $TargetOU = "OU=Terminated Users,OU=Managed Users,OU=Contoso,DC=contoso,DC=local"

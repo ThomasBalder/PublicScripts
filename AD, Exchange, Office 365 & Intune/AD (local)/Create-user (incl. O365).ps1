@@ -39,6 +39,25 @@ Start-Process "iexplore.exe" "https://cmdletpswmodule.blob.core.windows.net/exop
 you'll have to repeat that step manually.
 #>
 
+
+function Test-IsAdministrator {
+    <#
+    .Synopsis
+        Tests if the user is an administrator
+    .Description
+        Returns true if a user is an administrator, false if the user is not an administrator        
+    .Example
+        Test-IsAdministrator
+    #>   
+    
+    param() 
+    $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
+    (New-Object Security.Principal.WindowsPrincipal $currentUser).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+} #end function Test-IsAdministrator
+
+# Controleer of gebruiker een Administrator Powershell sessie heeft gestart
+If(-not (Test-IsAdministrator)) { Write-Output "Admin rights are required for this script. Please open a Administrator Powershell prompt and rerun the script." ; exit  }
+
 #Variables for local AD & Office 365
 $usagelocation = "NL"
 $FQDN = "contoso.com"
