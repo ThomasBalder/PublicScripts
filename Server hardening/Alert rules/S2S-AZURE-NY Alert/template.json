@@ -1,0 +1,73 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "activityLogAlerts_S2S_AZURE_NY_Alert_name": {
+            "defaultValue": "S2S-AZURE-NY Alert",
+            "type": "String"
+        },
+        "connections_S2S_AZURE_NY_externalid": {
+            "defaultValue": "/subscriptions/dyoursubscriptionid/resourceGroups/contoso-RG01/providers/Microsoft.Network/connections/SPINTRADCONN01",
+            "type": "String"
+        },
+        "actiongroups_health_notification_group_externalid": {
+            "defaultValue": "/subscriptions/dyoursubscriptionid/resourceGroups/contoso-ActivityLogs/providers/microsoft.insights/actiongroups/health-notification-group",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2020-10-01",
+            "name": "[parameters('activityLogAlerts_SPINTRADCONN01_Alert_name')]",
+            "location": "Global",
+            "properties": {
+                "scopes": [
+                    "/subscriptions/dyoursubscriptionid"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "ResourceHealth"
+                        },
+                        {
+                            "anyOf": [
+                                {
+                                    "field": "resourceType",
+                                    "equals": "Microsoft.Network/Connections"
+                                }
+                            ]
+                        },
+                        {
+                            "anyOf": [
+                                {
+                                    "field": "resourceGroup",
+                                    "equals": "contoso-RG01"
+                                }
+                            ]
+                        },
+                        {
+                            "anyOf": [
+                                {
+                                    "field": "resourceId",
+                                    "equals": "[parameters('connections_SPINTRADCONN01_externalid')]"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('actiongroups_health_notification_group_externalid')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true
+            }
+        }
+    ]
+}

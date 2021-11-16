@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "activityLogAlerts_S2S_AZURE_NY_Alert_name": {
+            "value": null
+        },
+        "connections_S2S_AZURE_NY_externalid": {
+            "value": null
+        },
+        "actiongroups_health_notification_group_externalid": {
+            "value": null
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "activityLogAlerts_Create_policy_assignment_name": {
+            "defaultValue": "Create policy assignment",
+            "type": "String"
+        },
+        "actiongroups_health_notification_group_externalid": {
+            "defaultValue": "/subscriptions/yoursubscriptionid/resourceGroups/contoso-ActivityLogs/providers/microsoft.insights/actiongroups/health-notification-group",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2020-10-01",
+            "name": "[parameters('activityLogAlerts_Create_policy_assignment_name')]",
+            "location": "Global",
+            "properties": {
+                "scopes": [
+                    "/subscriptions/yoursubscriptionid"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Authorization/policyAssignments/write"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('actiongroups_health_notification_group_externalid')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true
+            }
+        }
+    ]
+}

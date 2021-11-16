@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "actionGroups_health_notification_group_name": {
+            "defaultValue": "health-notification-group",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('actionGroups_health_notification_group_name')]",
+            "location": "Global",
+            "properties": {
+                "groupShortName": "Servicedesk",
+                "enabled": true,
+                "emailReceivers": [
+                    {
+                        "name": "Email SD_-EmailAction-",
+                        "emailAddress": "servicedesk@contoso.nl",
+                        "useCommonAlertSchema": true
+                    },
+                    {
+                        "name": "Email Admin1_-EmailAction-",
+                        "emailAddress": "admin1@contoso.nl",
+                        "useCommonAlertSchema": true
+                    },
+                    {
+                        "name": "E-mail Admin2_-EmailAction-",
+                        "emailAddress": "admin2@contoso.nl",
+                        "useCommonAlertSchema": false
+                    }
+                ],
+                "smsReceivers": [],
+                "webhookReceivers": [],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        }
+    ]
+}

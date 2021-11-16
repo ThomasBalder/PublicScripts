@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "activityLogAlerts_Delete_Network_Security_Group_name": {
+            "value": null
+        },
+        "actiongroups_health_notification_group_externalid": {
+            "value": null
+        }
+    }
+}

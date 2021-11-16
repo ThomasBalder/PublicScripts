@@ -1,0 +1,16 @@
+Name,samAccountName,GroupCategory,GroupScope,DisplayName,OU,Description
+Tier 0 Admins,Tier0Admins,Security,Global,Tier0 Admins,OU=Groups,OU=Tier0,OU=Admin,Group that contain all Tier 0 admins
+Tier 0 PAW Maintenance,Tier0PAWMaint,Security,Global,Tier0 PAW Maintenance,OU=Groups,OU=Tier0,OU=Admin,Members of this group maintain and support Tier0 Privileged Access Workstations
+Tier 0 PAW Users,Tier0PAWUsers,Security,Global,Tier0 PAW Users,OU=Groups,OU=Tier0,OU=Admin,Members of this group are permitted to log onto Tier0 Privileged Access Workstations using normal accounts
+Tier 0 Replication Maintenance,Tier0ReplicationMaintenance,Security,Global,Tier 0 Replication Maintenance,OU=Groups,OU=Tier0,OU=Admin,Members of this group are Tier 0 Replication Maintenance
+Tier 0 Servers,Tier0Servers,Security,Global,Tier0 Servers,OU=Groups,OU=Tier0,OU=Admin,Group that contain all Tier 0 servers
+Tier 0 Sync Servers,Tier0SyncServers,Security,Global,Tier0 Sync Servers,OU=Groups,OU=Tier0,OU=Admin,Group that contain all Tier 0 synchronisation servers
+Tier 1 Admins,Tier1Admins,Security,Global,Tier 1 Admins,OU=Groups,OU=Tier1,OU=Admin,Members of this group are Tier 1 Administrators
+Tier 1 PAW Maintenance,Tier1PAWMaint,Security,Global,Tier1 PAW Maintenance,OU=Groups,OU=Tier0,OU=Admin,Members of this group maintain and support Tier0 Privileged Access Workstations
+Tier 1 PAW Computers,Tier1PAWComputers,Security,Global,Tier1 PAW Computers,OU=Groups,OU=Tier1,OU=Admin,Group that contain all Tier 1 PAW Computers
+Tier 1 PAW Users,Tier1PAWUsers,Security,Global,Tier1 PAW Users,OU=Groups,OU=Tier1,OU=Admin,Members of this group are permitted to log onto Tier1 Privileged Access Workstations using normal accounts
+Tier 1 Server Maintenance,Tier1ServerMaintenance,Security,Global,Tier 1 Server Maintenance,OU=Groups,OU=Tier1,OU=Admin,Members of this group perform Tier 1 Server Maintenance
+Tier 1 Servers,Tier1Servers,Security,Global,Tier1 Servers,OU=Groups,OU=Tier1,OU=Admin,Group that contain all Tier 1 servers
+Tier 2 Admins ,Tier2Admins,Security,Global,Tier2 Admins,OU=Groups,OU=Tier2,OU=Admin,Group that contain all Tier 2 admins
+Tier 2 Servicedesk Operators,Tier2ServicedeskOperators,Security,Global,Service Desk Operators,OU=Groups,OU=Tier2,OU=Admin,Members of this group are Service Desk Operators
+Tier 2 Workstation Maintenance,Tier2WorkstationMaintenance,Security,Global,Workstation Maintenance,OU=Groups,OU=Tier2,OU=Admin,Members of this group perform Workstation Maintenance

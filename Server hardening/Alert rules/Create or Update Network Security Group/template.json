@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "activityLogAlerts_Create_or_Update_Network_Security_Group_name": {
+            "defaultValue": "Create or Update Network Security Group",
+            "type": "String"
+        },
+        "actiongroups_health_notification_group_externalid": {
+            "defaultValue": "/subscriptions/yoursubscription/resourceGroups/contoso-ActivityLogs/providers/microsoft.insights/actiongroups/health-notification-group",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2020-10-01",
+            "name": "[parameters('activityLogAlerts_Create_or_Update_Network_Security_Group_name')]",
+            "location": "Global",
+            "properties": {
+                "scopes": [
+                    "/subscriptions/yoursubscription"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/write"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "[parameters('actiongroups_health_notification_group_externalid')]",
+                            "webhookProperties": {}
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "[concat('Alerts when the event ', parameters('activityLogAlerts_Create_or_Update_Network_Security_Group_name'), ' happens.')]"
+            }
+        }
+    ]
+}
