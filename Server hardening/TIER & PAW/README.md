@@ -1,3 +1,5 @@
+# TIER & PAW
+
 This folder contains some scripts to implement Microsoft's TIER model (also known as ESAE).
 Orignal scripts are from:
 - Technet (used the wayback machine for this: http://web.archive.org/web/20201214180026/https://github.com/MicrosoftDocs/windowsserverdocs/blob/master/WindowsServerDocs/identity/securing-privileged-access/privileged-access-workstations.md) 
